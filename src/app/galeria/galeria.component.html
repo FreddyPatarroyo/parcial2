@@ -1,6 +1,8 @@
 <div class="contenedor">
     <app-formulario (newItem)="updateList($event)" ></app-formulario>
-
+    <div *ngIf = "!mensaje">
+        <h1>Se pasó socio</h1>
+    </div>
     <div *ngFor="let item of listItem" class="item">
         <app-item [item]="item"></app-item>
     </div>

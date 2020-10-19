@@ -16,6 +16,7 @@ export class GaleriaComponent implements OnInit {
   size : string;
   mensaje: boolean;
   
+  
   constructor(private itemServices: ItemServices) {
     this.size="";
     this.pagFiltro ="0";
