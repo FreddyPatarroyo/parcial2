@@ -11,7 +11,6 @@ export class ItemServices{
     constructor(private http: HttpClient){}
 
     public getList(): Observable<ModelItem[]>{
-        console.log(this.http.get (`https://picsum.photos/v2/list`));
         return this.http.get <ModelItem[]> (`https://picsum.photos/v2/list`);
     }
 }

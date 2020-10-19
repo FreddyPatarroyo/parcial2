@@ -1,4 +1,5 @@
 
+<app-formulario (newItem)="updateList($event)" ></app-formulario>
 <div *ngFor="let item of listItem" >
     <app-item [item]="item"></app-item>
 </div>
