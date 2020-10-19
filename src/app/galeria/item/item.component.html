@@ -1,8 +1,9 @@
 <div class="card m-4" style="width: 18rem;">
-    <img src="https://i.pinimg.com/originals/28/6e/3f/286e3f4baadbefbf8f57930e30b63864.jpg" class="card-img-top">
+    <img src="{{item.download_url}}" class="card-img-top">
+
     <div class="card-body">
-      <h5 class="card-title">Autor</h5>
-      <h5 lass="card-title">ID</h5>
-      <a href="#" class="btn btn-danger">Descargar</a>
+      <h5 class="card-title">{{item.author}}</h5>
+      <h5 lass="card-title">{{item.id}}</h5>
+      <a href="{{item.url}}" class="btn btn-danger">Descargar</a>
     </div>
   </div>

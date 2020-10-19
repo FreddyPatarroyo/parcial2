@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ModelItem } from '../models/item.model';
+import { ItemServices } from "../services/item.services";
 
 @Component({
   selector: 'app-galeria',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GaleriaComponent implements OnInit {
 
-  constructor() { }
+  listItem: ModelItem[];
+  
+  constructor(private itemServices: ItemServices) { }
 
   ngOnInit(): void {
+    this.llenarLista();
+  }
+
+  llenarLista(){
+    this.itemServices.getList().subscribe((res)=>{
+      this.listItem = res;
+    });
   }
 
 }
