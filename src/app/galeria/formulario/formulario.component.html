@@ -1,12 +1,15 @@
 <div class="card border-primary mb-3">
     <form name="formulario" action="035-ejemplo-atributos-min-max-html5.php" method="POST">
+
         <label for="number">Tamaño de la pagina</label> 
-        <input type="number" name="tamaño pagina" value="100" max="100" min="0">   
+        <input matInput [(ngModel)]="length" type="number" name="tamaño pagina" value="100" max="100" min="0">   
 
         <label for="autor">Nombre Del Artista</label>
         
         <input [(ngModel)]="autorFiltro" type="text" placeholder="Artista" name="nombre">
-        <input matInput [(ngModel)]="length" type="number" name="id">
+
+        <label for="id">Pagina #  </label>
+        <input matInput [(ngModel)]="id" type="text" name="id">
         
     </form>
 

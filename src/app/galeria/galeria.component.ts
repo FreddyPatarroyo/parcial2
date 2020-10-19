@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ModelItem } from '../models/item.model';
 import { ItemServices } from "../services/item.services";
-import { FormularioComponent } from './formulario/formulario.component';
+
 
 @Component({
   selector: 'app-galeria',
@@ -13,9 +12,16 @@ export class GaleriaComponent implements OnInit {
 
   listItem: ModelItem[];
   autorFiltro: string;
+  pagFiltro: string;
+  size : string;
+  mensaje: boolean;
   
   constructor(private itemServices: ItemServices) {
-    this.autorFiltro =FormularioComponent.name;
+    this.size="";
+    this.pagFiltro ="0";
+    this.autorFiltro=null;
+    this.mensaje = false;
+  
    }
 
   ngOnInit(): void {
@@ -25,25 +31,47 @@ export class GaleriaComponent implements OnInit {
   async llenarLista(){
     await this.itemServices.getList().subscribe((res)=>{
       this.listItem = res;
-      
       this.filtrar();
-      console.log(this.listItem)
     });
   }
 
   public updateList(value: string){
-    this.autorFiltro = value;
+    let entradas = value.split(',');
+    this.autorFiltro = entradas[0];
+    this.pagFiltro = entradas[1];
+    this.size = entradas[2];
     this.llenarLista();
   }
 
   public filtrar(){
     let lista = [];
+    let tempSize = this.listItem.length;
+    let count = 0;
 
-    for (let index = 0; index < this.listItem.length; index++) {
-      if(this.listItem[index].author.includes(this.autorFiltro)){
-        lista.push(this.listItem[index]);
-      }
+    if(this.pagFiltro == "" ||this.pagFiltro == null ){
+      this.pagFiltro ="0";
     }
-    this.listItem = lista;
+    count = parseInt(this.pagFiltro);
+
+    if(parseInt(this.size) > 0){
+      tempSize = parseInt(this.size);
+      count = tempSize
+      count = parseInt(this.pagFiltro)*tempSize;
+    }
+    
+    if(count+tempSize<30 || count > 0){
+
+      this.mensaje = false;
+      for (let index = 0; index < tempSize; index++) {
+        if(this.autorFiltro!=null &&this.listItem[index+count].author.includes(this.autorFiltro)){
+          lista.push(this.listItem[index+count]);
+        }else if(this.autorFiltro==null){
+          lista.push(this.listItem[index+count]);
+        }
+      }
+      this.listItem = lista;
+    }else {
+      this.mensaje = true;
+    }
   }
 }

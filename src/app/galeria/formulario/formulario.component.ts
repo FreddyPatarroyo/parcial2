@@ -10,10 +10,12 @@ export class FormularioComponent implements OnInit {
 
   autorFiltro: string;
   length: number;
+  id:string;
 
   constructor() { 
     this.autorFiltro = "";
-    this.length = -1;
+    this.length = 0;
+    this.id="0";
   }
   ngOnInit(): void {
     
@@ -22,6 +24,6 @@ export class FormularioComponent implements OnInit {
   @Output () newItem = new EventEmitter<String>();
 
   addNewAuthor(value: string){
-    this.newItem.emit(this.autorFiltro);
+    this.newItem.emit(this.autorFiltro +","+ this.id+","+this.length);
   }
 }
