@@ -43,3 +43,15 @@ button:hover{
     background: #ffffff;
     color: #000000;
 }
+
+@media (max-width: 1000px){ 
+    div{
+        width: 50%;
+    }
+}
+
+@media (max-width: 600px){ 
+    div{
+        width: 90%;
+    }
+}
